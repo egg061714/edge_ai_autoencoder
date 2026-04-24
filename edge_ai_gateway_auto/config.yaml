@@ -1,6 +1,6 @@
 name: Edge AI autoencoder 
 slug: edge_ai_gateway_auto
-version: "1.0.2"
+version: "1.0.3"
 description: Edge AI autoencoder
 arch:
   - aarch64
