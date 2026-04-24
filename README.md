@@ -1,0 +1,2 @@
+# edge_ai_autoencoder
+用來比較神經網路與非神經網路記憶體與cpu

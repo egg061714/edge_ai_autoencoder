@@ -1,0 +1,15 @@
+name: Edge AI autoencoder 
+slug: edge_ai_autoencoder
+version: "1.0.1"
+description: Edge AI autoencoder
+arch:
+  - aarch64
+  - armv7
+  - amd64
+startup: services
+boot: auto
+host_network: true
+map:
+  - share:rw
+options: {}
+schema: {}
