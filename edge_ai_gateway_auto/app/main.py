@@ -3,22 +3,18 @@ import json
 import time
 import threading
 import traceback
-from typing import Optional
 from collections import deque
 import psutil
 import os
-
 import numpy as np
 import joblib
 import paho.mqtt.client as mqtt
-from aioesphomeapi import APIClient
-# import torch  # 假設使用 PyTorch
-import torch.nn as nn
+import onnxruntime as ort  # 改用 ONNX
 
 # =========================================
 # 1. 檔案路徑與全域設定
 # =========================================
-MODEL_AE_PATH    = "/share/edge_ai_gateway/pi_model_auto_ae_weights.pth"        # Autoencoder 模型權重
+MODEL_AE_PATH    = "/share/edge_ai_gateway/ae_model.onnx"        # Autoencoder 模型權重
 MODEL_SCALER_PATH = "/share/edge_ai_gateway/pi_model_auto_scaler.joblib"      # 訓練時的 MinMaxScaler 或 StandardScaler
 CONF_PATH        = "/share/edge_ai_gateway/runtime_config.json"
 
