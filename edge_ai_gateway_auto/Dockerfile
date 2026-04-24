@@ -22,7 +22,7 @@ RUN pip3 install --no-cache-dir \
     paho-mqtt \
     aioesphomeapi \
     psutil \
-    torch --index-url https://download.pytorch.org/whl/cpu
+    # torch --index-url https://download.pytorch.org/whl/cpu
 
 COPY main.py /
 WORKDIR /

@@ -12,7 +12,7 @@ import numpy as np
 import joblib
 import paho.mqtt.client as mqtt
 from aioesphomeapi import APIClient
-import torch  # 假設使用 PyTorch
+# import torch  # 假設使用 PyTorch
 import torch.nn as nn
 
 # =========================================
