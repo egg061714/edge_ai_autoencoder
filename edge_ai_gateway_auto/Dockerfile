@@ -1,26 +1,26 @@
+# 1. 確保基礎鏡像正確
 ARG BUILD_FROM=ghcr.io/home-assistant/aarch64-base-python:3.12-bookworm
-# 如果你是用 Raspberry Pi 3 (32位元)，請改用: 
-# ARG BUILD_FROM=ghcr.io/home-assistant/armv7-base-python:3.12-bookworm
-
 FROM $BUILD_FROM
 
-# 安裝系統依賴 (ONNX 運行所需的共用庫)
+# 2. 安裝執行 ONNX 必備的系統庫 (不裝這個執行會報錯)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
-# 安裝 Python 庫 (移除所有編譯負擔重的庫，只留執行必要的)
-RUN pip3 install --no-cache-dir \
-    numpy==1.26.4 \
+# 3. 關鍵修正：強迫 pip 只下載預編譯好的 wheel，絕不現場編譯 (避免記憶體崩潰)
+# 同時指定較輕量的版本
+RUN pip3 install --upgrade pip
+RUN pip3 install --no-cache-dir --prefer-binary \
+    numpy \
     joblib \
     paho-mqtt \
     aioesphomeapi \
     psutil \
     onnxruntime
 
-# 複製程式碼
+# 4. 複製程式碼
 COPY main.py /
 WORKDIR /
-chmod +x /main.py
+RUN chmod +x /main.py
 
-CMD [ "python3", "app/main.py" ]
+CMD [ "python3", "/main.py" ]
